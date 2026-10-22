@@ -2,9 +2,7 @@ name: build
 
 on:
   push:
-    paths-ignore:
-      - 'out/**'
-      - 'build.log'
+    branches: [ main ]
   workflow_dispatch:
 
 permissions:
@@ -22,10 +20,7 @@ jobs:
           java-version: '17'
 
       - name: Build
-        id: build
-        continue-on-error: true
         run: |
-          exec > >(tee build.log) 2>&1
           set -euxo pipefail
           sudo apt-get update -qq
           sudo apt-get install -y -qq zip unzip openssl
@@ -35,7 +30,7 @@ jobs:
           echo "BT=$BT"
           echo "AJ=$AJ"
 
-          mkdir -p build/classes build/dex out
+          mkdir -p build/classes build/dex dist
           javac -source 8 -target 8 -classpath "$AJ" -d build/classes $(find src -name '*.java')
           "$BT/d8" --min-api 21 --lib "$AJ" --output build/dex $(find build/classes -name '*.class')
 
@@ -54,22 +49,26 @@ jobs:
             --v1-signing-enabled true --v2-signing-enabled true --v3-signing-enabled false \
             --out K218Launcher-patched.apk aligned.apk
           "$BT/apksigner" verify --print-certs K218Launcher-patched.apk
-          unzip -l K218Launcher-patched.apk | grep -E 'classes|guardless' || true
-          cp K218Launcher-patched.apk ../out/
+          cp K218Launcher-patched.apk ../dist/
           cd ..
-          sha256sum out/K218Launcher-patched.apk > out/SHA256.txt
+          sha256sum dist/K218Launcher-patched.apk | tee dist/SHA256.txt
 
-      - name: Publish
-        if: always()
-        run: |
-          git config user.name "launcher-bot"
-          git config user.email "bot@users.noreply.github.com"
-          cp build.log out/build.log 2>/dev/null || echo "no build.log" > out/build.log
-          if [ "${{ steps.build.outcome }}" != "success" ]; then
-            echo "BUILD FAILED - see out/build.log" > out/FAILED.txt
-          else
-            rm -f out/FAILED.txt
-          fi
-          git add -A out || true
-          git commit -m "build: ${{ steps.build.outcome }} [skip ci]" || echo "nothing to commit"
-          git push || true
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: K218Launcher-patched
+          path: dist/
+
+      - name: Publish release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: build
+          name: latest build
+          body: |
+            自动构建产物（每次推送 main 覆盖更新）
+            ${{ github.sha }}
+          files: |
+            dist/K218Launcher-patched.apk
+            dist/SHA256.txt
+          overwrite_files: true
+          make_latest: true
