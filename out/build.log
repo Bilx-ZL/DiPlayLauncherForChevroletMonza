@@ -1,0 +1,71 @@
++ sudo apt-get update -qq
++ sudo apt-get install -y -qq zip unzip openssl
++ curl -sSL -o /tmp/apktool.jar https://github.com/iBotPeaches/Apktool/releases/download/v2.9.3/apktool_2.9.3.jar
+++ tail -1
+++ sort -V
+++ ls -d /usr/local/lib/android/sdk/build-tools/34.0.0 /usr/local/lib/android/sdk/build-tools/35.0.0 /usr/local/lib/android/sdk/build-tools/35.0.1 /usr/local/lib/android/sdk/build-tools/36.0.0 /usr/local/lib/android/sdk/build-tools/36.1.0 /usr/local/lib/android/sdk/build-tools/37.0.0
++ BT=/usr/local/lib/android/sdk/build-tools/37.0.0
+++ sort -V
+++ tail -1
+++ ls -d /usr/local/lib/android/sdk/platforms/android-34-ext10/ /usr/local/lib/android/sdk/platforms/android-34-ext11/ /usr/local/lib/android/sdk/platforms/android-34-ext12/ /usr/local/lib/android/sdk/platforms/android-34-ext8/ /usr/local/lib/android/sdk/platforms/android-34/ /usr/local/lib/android/sdk/platforms/android-35-ext14/ /usr/local/lib/android/sdk/platforms/android-35-ext15/ /usr/local/lib/android/sdk/platforms/android-35/ /usr/local/lib/android/sdk/platforms/android-36-ext18/ /usr/local/lib/android/sdk/platforms/android-36-ext19/ /usr/local/lib/android/sdk/platforms/android-36.1/ /usr/local/lib/android/sdk/platforms/android-36/ /usr/local/lib/android/sdk/platforms/android-37.0/ /usr/local/lib/android/sdk/platforms/android-37.1/ /usr/local/lib/android/sdk/platforms/android-37.2-beta1/ /usr/local/lib/android/sdk/platforms/android-37.2-beta2/ /usr/local/lib/android/sdk/platforms/android-37.2-beta3/ /usr/local/lib/android/sdk/platforms/android-37.2/
++ AJ=/usr/local/lib/android/sdk/platforms/android-37.2/android.jar
++ echo BT=/usr/local/lib/android/sdk/build-tools/37.0.0
+BT=/usr/local/lib/android/sdk/build-tools/37.0.0
++ echo AJ=/usr/local/lib/android/sdk/platforms/android-37.2/android.jar
+AJ=/usr/local/lib/android/sdk/platforms/android-37.2/android.jar
++ mkdir -p build/classes build/dex out
+++ find src -name '*.java'
++ javac -source 8 -target 8 -classpath /usr/local/lib/android/sdk/platforms/android-37.2/android.jar -d build/classes src/com/tricheer/guard/Guard.java src/com/tricheer/guard/Desktop.java src/com/tricheer/guard/ui/AllAppsActivity.java src/com/tricheer/guard/ui/Footer.java src/com/tricheer/guard/ui/SettingsActivity.java src/com/tricheer/guard/ui/OpenDiPlay.java src/com/tricheer/guard/TileIcons.java src/com/tricheer/guard/Cfg.java src/com/tricheer/guard/DbSeed.java
+warning: [options] bootstrap class path not set in conjunction with -source 8
+Note: src/com/tricheer/guard/TileIcons.java uses or overrides a deprecated API.
+Note: Recompile with -Xlint:deprecation for details.
+1 warning
+++ find build/classes -name '*.class'
++ /usr/local/lib/android/sdk/build-tools/37.0.0/d8 --min-api 21 --lib /usr/local/lib/android/sdk/platforms/android-37.2/android.jar --output build/dex build/classes/com/tricheer/guard/TileIcons.class build/classes/com/tricheer/guard/Desktop.class 'build/classes/com/tricheer/guard/ui/SettingsActivity$3.class' build/classes/com/tricheer/guard/ui/AllAppsActivity.class 'build/classes/com/tricheer/guard/ui/SettingsActivity$5.class' 'build/classes/com/tricheer/guard/ui/AllAppsActivity$8.class' 'build/classes/com/tricheer/guard/ui/Footer$2.class' build/classes/com/tricheer/guard/ui/SettingsActivity.class 'build/classes/com/tricheer/guard/ui/AllAppsActivity$4.class' 'build/classes/com/tricheer/guard/ui/AllAppsActivity$3.class' build/classes/com/tricheer/guard/ui/Footer.class 'build/classes/com/tricheer/guard/ui/AllAppsActivity$9.class' 'build/classes/com/tricheer/guard/ui/AllAppsActivity$12.class' 'build/classes/com/tricheer/guard/ui/SettingsActivity$2.class' 'build/classes/com/tricheer/guard/ui/AllAppsActivity$5.class' 'build/classes/com/tricheer/guard/ui/SettingsActivity$5$1.class' 'build/classes/com/tricheer/guard/ui/AllAppsActivity$7.class' 'build/classes/com/tricheer/guard/ui/AllAppsActivity$6.class' build/classes/com/tricheer/guard/ui/OpenDiPlay.class 'build/classes/com/tricheer/guard/ui/SettingsActivity$4.class' 'build/classes/com/tricheer/guard/ui/AllAppsActivity$14.class' 'build/classes/com/tricheer/guard/ui/SettingsActivity$1.class' 'build/classes/com/tricheer/guard/ui/AllAppsActivity$2.class' 'build/classes/com/tricheer/guard/ui/AllAppsActivity$13.class' 'build/classes/com/tricheer/guard/ui/AllAppsActivity$11.class' 'build/classes/com/tricheer/guard/ui/Footer$1.class' 'build/classes/com/tricheer/guard/ui/AllAppsActivity$1.class' 'build/classes/com/tricheer/guard/ui/AllAppsActivity$10.class' 'build/classes/com/tricheer/guard/Guard$1.class' build/classes/com/tricheer/guard/Guard.class 'build/classes/com/tricheer/guard/TileIcons$1.class' build/classes/com/tricheer/guard/DbSeed.class build/classes/com/tricheer/guard/Cfg.class
++ java -jar /tmp/apktool.jar d -f -o work base/K218Launcher.apk
+I: Using Apktool 2.9.3 on K218Launcher.apk
+I: Loading resource table...
+I: Decoding file-resources...
+I: Loading resource table from file: /home/runner/.local/share/apktool/framework/1.apk
+I: Decoding values */* XMLs...
+I: Decoding AndroidManifest.xml with resources...
+I: Regular manifest package...
+I: Baksmaling classes.dex...
+I: Copying assets and libs...
+I: Copying unknown files...
+I: Copying original files...
++ python3 scripts/patch.py work
+[patch] smali injected
+[patch] icon copied: ic_guard_apps.png
+[patch] icon copied: ic_guard_settings.png
+[patch] icon copied: ic_guard_diplay.png
+[patch] activities added: 3
+[patch] ok
++ java -jar /tmp/apktool.jar b work -o build/unsigned.apk
+I: Using Apktool 2.9.3
+I: Checking whether sources has changed...
+I: Smaling smali folder into classes.dex...
+I: Checking whether resources has changed...
+I: Building resources...
+I: Building apk file...
+I: Copying unknown files/dir...
+I: Built apk into: build/unsigned.apk
++ cd build
++ cp dex/classes.dex classes2.dex
++ zip -q -j unsigned.apk classes2.dex
++ /usr/local/lib/android/sdk/build-tools/37.0.0/zipalign -f -p 4 unsigned.apk aligned.apk
++ openssl pkcs8 -inform DER -in ../keys/platform.pk8 -nocrypt -out platform.key
++ openssl pkcs12 -export -in ../keys/platform.x509.pem -inkey platform.key -name platform -out platform.p12 -passout pass:android
++ /usr/local/lib/android/sdk/build-tools/37.0.0/apksigner sign --ks platform.p12 --ks-pass pass:android --key-pass pass:android --v1-signing-enabled true --v2-signing-enabled true --v3-signing-enabled false --out K218Launcher-patched.apk aligned.apk
++ /usr/local/lib/android/sdk/build-tools/37.0.0/apksigner verify --print-certs K218Launcher-patched.apk
+V2 Signer: certificate DN: EMAILADDRESS=android@android.com, CN=Android, OU=Android, O=Android, L=Mountain View, ST=California, C=US
+V2 Signer: certificate SHA-256 digest: c8a2e9bccf597c2fb6dc66bee293fc13f2fc47ec77bc6b2b0d52c11f51192ab8
+V2 Signer: certificate SHA-1 digest: 27196e386b875e76adf700e7ea84e4c6eee33dfa
+V2 Signer: certificate MD5 digest: 8ddb342f2da5408402d7568af21e29f9
++ unzip -l K218Launcher-patched.apk
++ grep -E 'classes|guardless'
+   230248  2026-10-22 22:38   classes.dex
+    47408  2026-10-22 22:38   classes2.dex
++ cp K218Launcher-patched.apk ../out/
++ cd ..
++ sha256sum out/K218Launcher-patched.apk
