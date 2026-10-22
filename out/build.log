@@ -64,8 +64,8 @@ V2 Signer: certificate SHA-1 digest: 27196e386b875e76adf700e7ea84e4c6eee33dfa
 V2 Signer: certificate MD5 digest: 8ddb342f2da5408402d7568af21e29f9
 + unzip -l K218Launcher-patched.apk
 + grep -E 'classes|guardless'
-   230248  2026-10-22 22:38   classes.dex
-    47408  2026-10-22 22:38   classes2.dex
+   230248  2026-10-22 22:41   classes.dex
+    47408  2026-10-22 22:41   classes2.dex
 + cp K218Launcher-patched.apk ../out/
 + cd ..
 + sha256sum out/K218Launcher-patched.apk
