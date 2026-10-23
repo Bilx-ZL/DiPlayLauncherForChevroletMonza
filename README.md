@@ -57,9 +57,7 @@ https://github.com/shihabal3amri/DiPlay
    adb install -r K218Launcher-patched.apk
    ```
 
-安装后首次启动会自动完成初始化：补齐三个入口（全部应用 / 守护设置 / 打开DiPlay）、按需重建桌面图标、校正内部计数。
-
-> 注意：两个守护功能默认是**关闭**的，需要在「守护设置」里手动开启。
+> 首次安装后，两个守护功能默认是**关闭**的，需要在「守护设置」里手动开启。
 
 ## 回退
 
@@ -69,19 +67,6 @@ adb shell pm uninstall com.tricheer.launcher218
 
 该命令会卸载本次更新，桌面回到 `/system` 中的原厂版本。
 
-**注意**：卸载会同时清除应用数据（常驻配置、桌面图标顺序、守护设置）。如需彻底恢复，可直接恢复出厂设置。
-
-## 构建
-
-本仓库通过 GitHub Actions 自动构建，推送 `main` 触发（`.mp4` / `.md` / `LICENSE` 的改动不会触发）。
-
-产物发布到 Release（固定 tag `build`），下载地址恒定：
-
-```
-https://github.com/Bilx-ZL/DiPlayLauncherForChevroletMonza/releases/download/build/K218Launcher-patched.apk
-```
-
-构建流程：apktool 解包原厂 APK → 注入 smali 挂钩 → `javac` + `d8` 生成 `classes2.dex` → 重打包 → `zipalign` → `apksigner`（平台密钥，v1 + v2）签名。
 
 ## 免责声明
 
