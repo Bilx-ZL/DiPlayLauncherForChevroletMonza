@@ -39,6 +39,8 @@ https://github.com/shihabal3amri/DiPlay
 
 让 DiPlay 与热点始终保持运行，使 DiPlay 能够完整替代原厂 CarPlay。
 
+▶ [查看演示视频](media/Demo.MOV)
+
 ## 安装
 
 本项目使用 **AOSP 公开平台密钥**签名，与车机原厂桌面证书一致，因此可以直接覆盖安装原厂桌面，**数据保留**。
