@@ -39,7 +39,10 @@ https://github.com/shihabal3amri/DiPlay
 
 让 DiPlay 与热点始终保持运行，使 DiPlay 能够完整替代原厂 CarPlay。
 
-▶ [查看演示视频](media/Demo.MOV)
+
+点火自动运行视频
+https://github.com/user-attachments/assets/b84ecdaa-a042-477b-bdd8-cf681fac3d45
+
 
 ## 安装
 
